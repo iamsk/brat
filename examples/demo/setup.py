@@ -20,7 +20,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'tornado-restful',
+        'brat',
         'pony',
         'rxpy',
     ],

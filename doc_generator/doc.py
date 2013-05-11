@@ -65,7 +65,7 @@ def init_doc_conf():
     import shutil
 
     os.mkdir('docs')
-    shutil.copy('eggs/tornado-restful/doc_generator/doc.conf', 'docs')
+    shutil.copy('eggs/brat/doc_generator/doc.conf', 'docs')
 
 
 def gen():

@@ -8,9 +8,9 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 setup(
-    name='Tornado-RESTful',
+    name='Brat',
     version='0.0.1',
-    url='https://www.bitbucket.org/iamsk/tornado-restful/',
+    url='https://github.com/iamsk/brat',
     author='iamsk',
     author_email='iamsk.info@gmail.com',
     description='Simple framework for creating REST APIs',
