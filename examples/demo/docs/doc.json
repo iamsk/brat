@@ -1,0 +1,9 @@
+{
+  "endpoints": [
+    "GET    /users/(\\d+)",
+    "DELETE /users/(\\d+)",
+    "GET    /users",
+    "DELETE /users"
+  ],
+  "version": "0.0.1"
+}

@@ -1,0 +1,8 @@
+*.pyc
+*.swp
+bin
+parts
+eggs
+develop-eggs
+.installed.cfg
+*.egg-info

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>demo API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="media/css/restdown.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+<div id="header">
+    <h1>demo API Documentation</h1>
+</div>
+
+    <div id="sidebar">
+<ul>
+  <li><div><a href="#users">users</a></div>
+  <ul>
+    <li><div><a href="#GET-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users/(\d+)</span></span></a></div></li>
+    <li><div><a href="#DELETE-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users/(\d+)</span></span></a></div></li>
+    <li><div><a href="#GET-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users</span></span></a></div></li>
+    <li><div><a href="#DELETE-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users</span></span></a></div></li>
+  </ul></li>
+</ul>
+
+    </div>
+    <div id="content">
+
+<h1>demo API</h1>
+<div class="intro">
+
+
+<h3>All API calls start with</h3>
+
+<pre class="base">
+http://localhost:5000
+</pre>
+
+<h3>Path</h3>
+
+<p>For this documentation, we will assume every request begins with the above path.</p>
+
+<h3>Format</h3>
+
+<p>All calls are returned in <strong>JSON</strong>.</p>
+
+<h3>Status Codes</h3>
+
+<ul>
+<li><strong>200</strong> Successful GET and PUT.</li>
+<li><strong>201</strong> Successful POST.</li>
+<li><strong>202</strong> Successful Provision queued.</li>
+<li><strong>204</strong> Successful DELETE</li>
+<li><strong>401</strong> Unauthenticated.</li>
+<li><strong>409</strong> Unsuccessful POST, PUT, or DELETE (Will return an errors object)</li>
+</ul>
+
+
+</div>
+<h1 id="users">users</h1>
+
+<h2 id="GET-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users/(\d+)</span></span></h2>
+
+<p>用户详细信息</p>
+
+<h4>example request</h4>
+
+<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
+  -F 'phone=6041234567'
+</code></pre>
+
+<h4>response</h4>
+
+<pre><code>pass
+</code></pre>
+
+<h2 id="DELETE-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users/(\d+)</span></span></h2>
+
+<p>删除用户</p>
+
+<h4>example request</h4>
+
+<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
+  -F 'phone=6041234567'
+</code></pre>
+
+<h4>response</h4>
+
+<pre><code>pass
+</code></pre>
+
+<h2 id="GET-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users</span></span></h2>
+
+<p>用户列表</p>
+
+<h4>example request</h4>
+
+<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
+  -F 'phone=6041234567'
+</code></pre>
+
+<h4>response</h4>
+
+<pre><code>pass
+</code></pre>
+
+<h2 id="DELETE-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users</span></span></h2>
+
+<p>添加用户</p>
+
+<h4>example request</h4>
+
+<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
+  -F 'phone=6041234567'
+</code></pre>
+
+<h4>response</h4>
+
+<pre><code>pass
+</code></pre>
+
+    </div>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+    var headerHeight = $("#header").height();
+    var offsets = [];
+    var current = -1;
+
+    function endpoint(scrollDistance) {
+        if (scrollDistance < offsets[0]) {
+            return -1;
+        } else {
+            for (var id = offsets.length; id > 0; id--) {
+                if (scrollDistance > offsets[id - 1]) {
+                    return id - 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    $("h2").each(function(i) {
+        offsets.push($(this).offset().top - headerHeight)
+    });
+
+    $("#content").append('<h2 class="fixed" style="display: none"><span>&nbsp;</span></h2>');
+    var fixed_h2 = $("h2.fixed");
+    var fixed_span = $("h2.fixed span");
+
+    $("#content").scroll(function() {
+        var scrollDistance = $("#content").attr('scrollTop');
+        var now = endpoint(scrollDistance);
+
+        if (now !== current) {
+            $("#sidebar li").removeClass("current");
+            current = now;
+            if (current < 0) {
+                fixed_h2.hide();
+            } else if (current >= 0) {
+                var heading = $($("h2 span")[current]).text();
+                $("#sidebar a[href|=#" + heading.replace(' ', '-') + "]").parent().addClass("current");
+                fixed_span.text(heading);
+                fixed_h2.show();
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
