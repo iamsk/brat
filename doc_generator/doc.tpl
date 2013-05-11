@@ -45,8 +45,9 @@ All calls are returned in **JSON**.
     {{ option['request'] }}
 
 #### response
-
+    {% autoescape None %}
     {{ option['response'] }}
+    {% autoescape %}
 
 {% end %}
 {% end %}

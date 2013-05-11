@@ -3,6 +3,7 @@
 import os
 import sys
 import imp
+import json
 import argparse
 import requests
 from tornado import template
@@ -43,7 +44,8 @@ def _gen(config):
         for option in options:
             if option['method'] in ['GET', 'DELETE']:
                 r = requests.get(request_url, auth=('user', 'pass'))
-                option['response'] = r.json()
+                response = json.dumps(r.json(), indent=8, ensure_ascii=False)
+                option['response'] = response
                 option['request'] = 'curl --basic %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
             else:
                 option['response'] = ''
