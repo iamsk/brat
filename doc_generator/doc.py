@@ -43,13 +43,13 @@ def _gen(config):
         options = r.json()
         for option in options:
             if option['method'] in ['GET', 'DELETE']:
-                r = requests.get(request_url, auth=('user', 'pass'))
+                r = requests.get(request_url, auth=(config['USERNAME'], config['PASSWORD']))
                 response = json.dumps(r.json(), indent=8, ensure_ascii=False)
                 option['response'] = response
-                option['request'] = 'curl --basic %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
+                option['request'] = 'curl -u %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
             else:
                 option['response'] = ''
-                option['request'] = 'curl --basic %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
+                option['request'] = 'curl -u %s:%s %s -X %s -d %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'], 'params')
         group_urls[base_regex][regex] = options
 
     TPL_DIR = os.path.realpath(os.path.dirname(__file__))
