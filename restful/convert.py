@@ -26,7 +26,7 @@ def _row2dict4list(row_list):
 
 
 def get_offset_limit(self, max_count=MACRO.DEFAULT_MAX_COUNT):
-    offset = int(self.get_argument('offset', MACRO.DEFAULT_COUNT))
+    offset = int(self.get_argument('offset', MACRO.ZERO))
     limit = int(self.get_argument('limit', MACRO.DEFAULT_COUNT))
     return offset, _get_limit(limit, max_count)
 
