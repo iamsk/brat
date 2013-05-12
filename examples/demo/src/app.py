@@ -2,12 +2,13 @@
 #-*- coding: utf-8 -*-
 
 from restful import Api
-from view import UsersHandler, UserHandler
+from views import UsersHandler, UserHandler
 
 api = Api()
 
-api.define('port', default=5000, help="Run on the given port", type=int)
-api.define('clients', default=['1234567890'])
+api.define('port', default=7778, help="Run on the given port", type=int)
+api.define('need_auth', default=True)
+api.define('api_url', default='http://localhost:7778')
 
 api.add_handler('/users', UsersHandler)
 api.add_handler('/users/(\d+)', UserHandler)
