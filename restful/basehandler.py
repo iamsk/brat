@@ -3,6 +3,7 @@
 
 import tornado
 import ujson
+from tornado.options import options
 
 from restful.macro import HTTP_CODE
 from restful.exception import exceptions
@@ -16,10 +17,12 @@ class BaseHandler(Authenticator, tornado.web.RequestHandler):
 
     def prepare(self):
         try:
+            if not getattr(options, 'need_auth', False):
+                return
             if self.request.method.upper() == 'OPTIONS':
                 return
             self.auth = self.validate()
-            if self.auth['type'] == 'client':
+            if self.auth['type'] == 'oauth':
                 allow_client_methods = getattr(self, 'allow_client_methods', [])
                 if self.request.method.upper() not in allow_client_methods:
                     raise exceptions.Forbidden(message=u'应用独立请求时，无此操作权限')
@@ -75,3 +78,20 @@ class BaseHandler(Authenticator, tornado.web.RequestHandler):
         self._chunk = chunk
         self.set_header("Content-Type", "application/json")
         tornado.web.RequestHandler.finish(self, self._chunk)
+
+
+class NotFoundHandler(BaseHandler):
+    def real_get(self, *args, **kwargs):
+        raise exceptions.NotFound
+
+    def real_put(self, *args, **kwargs):
+        raise exceptions.NotFound
+
+    def real_post(self, *args, **kwargs):
+        raise exceptions.NotFound
+
+    def real_delete(self, *args, **kwargs):
+        raise exceptions.NotFound
+
+    def real_options(self, *args, **kwargs):
+        raise exceptions.NotFound

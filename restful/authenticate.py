@@ -20,15 +20,21 @@ class Authenticator(object):
         auth = self.request.headers['Authorization'].split()
         self.auth_type = auth[0].lower()
         self.auth_value = " ".join(auth[1:]).strip()
-        if self.auth_type == 'client':
-            client_key = self.validate_client(self.auth_value)
-            info = {'type': 'client', 'client_key': client_key}
-        elif self.auth_type == "basic":
+        if self.auth_type == "basic":
             import base64
             kv = base64.decodestring(self.auth_value)
             kv = kv.split(':')
             user_id = self.validate_basic(kv[0], kv[1])
-            info = {'type': 'Basic', 'user_id': user_id}
+            info = {'type': 'basic', 'user_id': user_id}
+        elif self.auth_type == 'bearer':
+            user_id = self.validate_bearer(self.auth_value)
+            info = {'type': 'bearer', 'user_id': user_id}
+        elif self.auth_type == 'oauth':
+            client_key = self.validate_client(self.auth_value)
+            info = {'type': 'oauth', 'client_key': client_key}
+        elif self.auth_type == "mac":
+            user_id = self.validate_mac(self.auth_value)
+            info = {'type': 'mac', 'user_id': user_id}
         else:
             raise exceptions.BadRequest(message=u"不支持的验证方式")
         return info
@@ -43,9 +49,10 @@ class Authenticator(object):
         """
         Validate client request
         """
-        from tornado.options import options
+        raise exceptions.InternalServerError(message=u'Two legged Auth 未实现')
 
-        if client_key not in options.clients:
-            error_message = u"应用（client_key: %s）不存在" % client_key
-            raise exceptions.BadRequest(message=error_message)
-        return client_key
+    def validate_bearer(self, token):
+        """
+        Validate bearer.
+        """
+        raise exceptions.InternalServerError(message=u'bearer 未实现')
