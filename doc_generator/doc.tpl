@@ -36,9 +36,9 @@ All calls are returned in **JSON**.
 {% for option in options %}
 ## {{ option['method'] }} {{ true_url }}
 
-{{ option['description'] }}
+DESCRIPTION: {{ option['description'] }}
 
-{{ option.get('params', []) }}
+PARAMS: {{ option.get('params', []) }}
 
 #### example request
 

@@ -27,7 +27,7 @@ def _gen(config):
     group_urls = dict()
     info = {'title': config['TITLE'], 'base_url': config['BASE_URL'], 'version': config['VERSION'], 'group_urls': group_urls}
 
-    for regex, obj in app.handlers:
+    for regex, obj in app.handlers[:-1]:
         base_regex = regex.strip('/').split('/')[0]
         group_urls.setdefault(base_regex, dict())
         _regex = regex.replace('(\\d+)', '1')
