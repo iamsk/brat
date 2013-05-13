@@ -25,9 +25,13 @@ class Api(object):
     def define(self, name, default=None, type=None, help=None):
         _define(name, default, type, help)
 
-    def run(self):
+    def get_app(self):
         tornado.options.parse_command_line()
         application = tornado.web.Application(self.handlers, **self.settings)
+        return application
+
+    def run(self):
+        application = self.get_app()
         http_server = tornado.httpserver.HTTPServer(application, xheaders=True)
         http_server.listen(getattr(options, 'port', 7777), '0.0.0.0')
         tornado.ioloop.IOLoop.instance().start()

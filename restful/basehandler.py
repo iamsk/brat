@@ -2,13 +2,13 @@
 #-*- coding: utf-8 -*-
 
 import tornado
-import ujson
 from tornado.options import options
 
 from restful.macro import HTTP_CODE
 from restful.exception import exceptions
 from restful.exception.handler import ExceptionHandler
 from restful.authenticate import Authenticator
+from restful.serializers import JsonEncoder, XmlEncoder
 
 
 class BaseHandler(Authenticator, tornado.web.RequestHandler):
@@ -17,6 +17,13 @@ class BaseHandler(Authenticator, tornado.web.RequestHandler):
 
     def prepare(self):
         try:
+            support_accept_headers = ['application/json', 'application/xml']
+            accept_header = self.request.headers.get('Accept', 'application/json')
+            self.media_type = accept_header if accept_header in support_accept_headers else 'application/json'
+            if self.media_type == 'application/json':
+                self.encoder = JsonEncoder
+            else:
+                self.encoder = XmlEncoder
             if not getattr(options, 'need_auth', False):
                 return
             if self.request.method.upper() == 'OPTIONS':
@@ -30,7 +37,8 @@ class BaseHandler(Authenticator, tornado.web.RequestHandler):
                 self.user_id = self.auth['user_id']
         except exceptions.APIException, e:
             self.set_status(HTTP_CODE.UNAUTHORIZED)
-            return self.finish(ujson.dumps(e.info))
+            output = self.encoder(e.info)
+            return self.finish(output)
 
     @property
     def login_id(self):
@@ -76,7 +84,7 @@ class BaseHandler(Authenticator, tornado.web.RequestHandler):
 
     def finish(self, chunk=None):
         self._chunk = chunk
-        self.set_header("Content-Type", "application/json")
+        self.set_header("Content-Type", self.media_type)
         tornado.web.RequestHandler.finish(self, self._chunk)
 
 

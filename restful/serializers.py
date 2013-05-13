@@ -2,15 +2,17 @@
 #-*- coding: utf-8 -*-
 
 from ujson import dumps
+from dicttoxml import dicttoxml
 
 
-class JsonEncoder(object):
-    def __init__(self, data):
-        self.mimetype = 'application/json'
-        self.extension = 'json'
+def JsonEncoder(data):
+    return dumps(data)
 
-    def encode(self):
-        return dumps(self.data)
 
-    def __unicode__(self):
-        return self.encode(self.data)
+def XmlEncoder(data):
+    return dicttoxml(data)
+
+
+if __name__ == '__main__':
+    d = {'hello': 'world'}
+    print JsonEncoder(d)
