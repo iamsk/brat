@@ -4,7 +4,6 @@ __email__ = 'iamsk.info@gmail.com'
 
 import logging
 import random
-from ujson import dumps
 from tornado.web import RequestHandler
 
 from restful.macro import HTTP_CODE
@@ -15,7 +14,8 @@ def ExceptionHandler(func):
     def _ExceptionHandler(self, *args, **kwargs):
         try:
             info = func(self, *args, **kwargs)
-            return self.finish(dumps(info))
+            output = self.encoder(info)
+            return self.finish(output)
         except exceptions.BadRequest, e:
             self.set_status(HTTP_CODE.BAD_REQUEST)
             logging.warning(e)
@@ -38,7 +38,8 @@ def ExceptionHandler(func):
             logging.error(e, exc_info=True)
             e = exceptions.InternalServerError(message=e.message)
             self.set_status(HTTP_CODE.INTERNAL_SERVER_ERROR)
-        return self.finish(dumps(e.info))
+        output = self.encoder(e.info)
+        return self.finish(output)
 
     return _ExceptionHandler
 

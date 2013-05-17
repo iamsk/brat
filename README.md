@@ -5,6 +5,10 @@
      |______  /|____|_  /\____|__  /____|   
             \/        \/         \/          
 
+A [framework|practice] of RESTful API based on Tornado
+
+[![Build Status](https://secure.travis-ci.org/iamsk/brat.png?branch=master)](http://travis-ci.org/iamsk/brat)
+
 ##Installation
 
     git clone git@github.com:iamsk/brat.git
@@ -13,6 +17,7 @@
 
 ##Requirements
 
+* python 2.6 or 2.7
 * tornado
 * ujson
 * requests

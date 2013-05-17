@@ -20,9 +20,10 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'tornado',
-        'ujson',
-        'requests',
+        'tornado>=2.4',
+        'ujson>=1.30',
+        'requests>=1.2.0',
+        'dicttoxml>=1.1.1',
     ],
     entry_points="""
     [console_scripts]
