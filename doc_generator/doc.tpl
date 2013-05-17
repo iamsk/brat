@@ -22,12 +22,14 @@ All calls are returned in **JSON**.
 
 ### Status Codes
 
-- **200** Successful GET and PUT.
+- **200** Successful OPTIONS, GET and DELETE.
 - **201** Successful POST.
-- **202** Successful Provision queued.
-- **204** Successful DELETE
-- **401** Unauthenticated.
-- **409** Unsuccessful POST, PUT, or DELETE (Will return an errors object)
+- **202** Successful PUT.
+- **400** Bad Request.
+- **401** Unauthorized.
+- **403** Forbidden.
+- **404** Not Found.
+- **500** Internal Server Error.
 
 {% for group_url, true_urls in group_urls.items() %}
 # {{ group_url }}
