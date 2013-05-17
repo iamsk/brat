@@ -31,6 +31,10 @@ All calls are returned in **JSON**.
 - **404** Not Found.
 - **500** Internal Server Error.
 
+### Auth Headers
+Basic base64(username:password) used for basic auth
+Client base64(client_key:client_secret) used for client auth
+
 {% for group_url, true_urls in group_urls.items() %}
 # {{ group_url }}
 

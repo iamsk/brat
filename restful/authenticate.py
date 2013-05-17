@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
+import base64
 from restful.exception import exceptions
 
 
@@ -21,7 +22,6 @@ class Authenticator(object):
         self.auth_type = auth[0].lower()
         self.auth_value = " ".join(auth[1:]).strip()
         if self.auth_type == "basic":
-            import base64
             kv = base64.decodestring(self.auth_value)
             kv = kv.split(':')
             user_id = self.validate_basic(kv[0], kv[1])
@@ -29,12 +29,11 @@ class Authenticator(object):
         elif self.auth_type == 'bearer':
             user_id = self.validate_bearer(self.auth_value)
             info = {'type': 'bearer', 'user_id': user_id}
-        elif self.auth_type == 'oauth':
-            client_key = self.validate_client(self.auth_value)
-            info = {'type': 'oauth', 'client_key': client_key}
-        elif self.auth_type == "mac":
-            user_id = self.validate_mac(self.auth_value)
-            info = {'type': 'mac', 'user_id': user_id}
+        elif self.auth_type == 'client':
+            kv = base64.decodestring(self.auth_value)
+            kv = kv.split(':')
+            client_id = self.validate_client(kv[0], kv[1])
+            info = {'type': 'client', 'client_id': client_id}
         else:
             raise exceptions.BadRequest(message=u"不支持的验证方式")
         return info
@@ -53,6 +52,6 @@ class Authenticator(object):
 
     def validate_bearer(self, token):
         """
-        Validate bearer.
+        Validate bearer Auth.
         """
         raise exceptions.InternalServerError(message=u'bearer 未实现')
