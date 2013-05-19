@@ -24,6 +24,7 @@ setup(
         'ujson>=1.30',
         'requests>=1.2.0',
         'dicttoxml>=1.1.1',
+        'argparse',
     ],
     entry_points="""
     [console_scripts]
