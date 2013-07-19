@@ -26,20 +26,20 @@ A [framework|practice] of RESTful API based on Tornado
 
 ###$ more examples/miminal.py
 
-    from restful import Api
-    from restful.basehandler import BaseHandler
-
-    api = Api()
-
-
-    class HelloWorld(BaseHandler):
-        def real_get(self):
-            return {'hello': 'world'}
-
-    api.add_handler('/', HelloWorld)
-
-    if __name__ == '__main__':
-        api.run()
+    from brat import Brat
+	from brat import BratHandler
+	
+	brat = Brat()
+	
+	
+	class HelloWorld(BratHandler):
+	    def get(self):
+	        return {'hello': 'world'}
+	
+	brat.add_handler('/', HelloWorld)
+	
+	if __name__ == '__main__':
+	    brat.run()
 
 ###$ python miminal.py
 
@@ -61,7 +61,7 @@ A [framework|practice] of RESTful API based on Tornado
 
     used for generate docs for api
 
-1. write real_options for each handler
+1. write options method for each handler
 2. change your docs/doc.conf
 
 you will see doc at docs/doc.html
