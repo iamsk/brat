@@ -21,7 +21,7 @@ setup(
     install_requires=[
         'setuptools',
         'brat',
-        'pony',
+        'pony<=0.4.6',
         'rxpy',
     ],
     entry_points="""

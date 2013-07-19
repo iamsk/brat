@@ -1,19 +1,19 @@
 import unittest
-from restful import Api
-from restful.basehandler import BaseHandler
+from brat import Brat
+from brat import BratHandler
 from tornado.testing import AsyncHTTPTestCase
 
 
-class HelloWorld(BaseHandler):
-    def real_get(self):
+class HelloWorld(BratHandler):
+    def get(self):
         return {'hello': 'world'}
 
 
 class Test(AsyncHTTPTestCase):
     def get_app(self):
-        api = Api()
-        api.add_handler('/', HelloWorld)
-        self.app = api.get_app()
+        brat = Brat()
+        brat.add_handler('/', HelloWorld)
+        self.app = brat.get_app()
         return self.app
 
     def test_get(self):
