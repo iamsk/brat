@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-from tornado.options import options
 from pony.orm import commit
 
 from brat.exception import exceptions
@@ -25,9 +24,8 @@ class BaseHandler(BratHandler):
 
 class UserMixin(object):
     def __get_pagination_args(self, f, *args):
-        base_url = ''.join([options.api_url, '/users'])
-        params = {'offset': args[0], 'limit': args[1]}
-        return {'base_url': base_url, 'params': params}
+        params = {'offset': args[-2], 'limit': args[-1]}
+        return {'params': params}
 
     @Paginator(__get_pagination_args, '/users')
     def get_users(self, offset, limit):
