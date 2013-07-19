@@ -3,7 +3,7 @@
 
 from urlparse import urlparse
 
-from restful.macro import MACRO
+from brat.macro import MACRO
 
 
 def format_url(url):

@@ -6,8 +6,8 @@ import logging
 import random
 from tornado.web import RequestHandler
 
-from restful.macro import HTTP_CODE
-from restful.exception import exceptions
+from brat.macro import HTTP_CODE
+from brat.exception import exceptions
 
 
 def ExceptionHandler(func):

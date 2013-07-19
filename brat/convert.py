@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-from restful.macro import MACRO
+from brat.macro import MACRO
 
 
 def row2dict(row):
