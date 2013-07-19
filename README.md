@@ -7,7 +7,7 @@
 
 A [framework|practice] of RESTful API based on Tornado
 
-[![Build Status](https://secure.travis-ci.org/iamsk/brat.png?branch=master)](http://travis-ci.org/iamsk/brat)
+[![Build Status](https://secure.travis-ci.org/iamsk/brat.png?branch=v2)](http://travis-ci.org/iamsk/brat)
 
 ##Installation
 
