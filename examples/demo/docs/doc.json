@@ -3,7 +3,7 @@
     "GET    /users/(\\d+)",
     "DELETE /users/(\\d+)",
     "GET    /users",
-    "DELETE /users"
+    "POST   /users"
   ],
   "version": "0.0.1"
 }

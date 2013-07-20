@@ -5,7 +5,7 @@ import logging
 import time
 from tornado.options import options
 
-from restful.utils import urlencode
+from brat.utils import urlencode
 
 
 def Paginator(get_pagination_kwargs, path, is_offset=True):

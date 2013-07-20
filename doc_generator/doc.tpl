@@ -8,9 +8,7 @@ version: {{ version }}
 
 ### All API calls start with
 
-<pre class="base">
-{{ base_url }}
-</pre>
+<pre class="base">{{ base_url }}</pre>
 
 ### Path
 
@@ -32,29 +30,32 @@ All calls are returned in **JSON**.
 - **500** Internal Server Error.
 
 ### Auth Headers
+
 Basic base64(username:password) used for basic auth
+
 Client base64(client_key:client_secret) used for client auth
 
 {% for group_url, true_urls in group_urls.items() %}
 # {{ group_url }}
 
-{% for true_url, options in true_urls.items() %}
-{% for option in options %}
+    {% for true_url, options in true_urls.items() %}
+        {% for option in options %}
 ## {{ option['method'] }} {{ true_url }}
 
 DESCRIPTION: {{ option['description'] }}
 
 PARAMS: {{ option.get('params', []) }}
 
-#### example request
+### request
 
     {{ option['request'] }}
 
-#### response
+### response
+
     {% autoescape None %}
     {{ option['response'] }}
     {% autoescape %}
 
-{% end %}
-{% end %}
+        {% end %}
+    {% end %}
 {% end %}

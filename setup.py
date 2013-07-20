@@ -9,7 +9,7 @@ def read(*rnames):
 
 setup(
     name='Brat',
-    version='0.0.1',
+    version='0.0.2',
     url='https://github.com/iamsk/brat',
     author='iamsk',
     author_email='iamsk.info@gmail.com',

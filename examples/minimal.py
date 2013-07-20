@@ -1,14 +1,14 @@
-from restful import Api
-from restful.basehandler import BaseHandler
+from brat import Brat
+from brat import BratHandler
 
-api = Api()
+brat = Brat()
 
 
-class HelloWorld(BaseHandler):
-    def real_get(self):
+class HelloWorld(BratHandler):
+    def get(self):
         return {'hello': 'world'}
 
-api.add_handler('/', HelloWorld)
+brat.add_handler('/', HelloWorld)
 
 if __name__ == '__main__':
-    api.run()
+    brat.run()

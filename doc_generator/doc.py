@@ -45,10 +45,12 @@ def _gen(config):
             if option['method'] in ['GET', 'DELETE']:
                 r = requests.get(request_url, auth=(config['USERNAME'], config['PASSWORD']))
                 response = json.dumps(r.json(), indent=8, ensure_ascii=False)
-                option['response'] = response
+                _response = response.split('\n')
+                _response[-1] = '    ' + _response[-1]
+                option['response'] = '\n'.join(_response)
                 option['request'] = 'curl -u %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
             else:
-                option['response'] = ''
+                option['response'] = 'Sorry, not support for docing currently!'
                 option['request'] = 'curl -u %s:%s %s -X %s -d %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'], 'params')
         group_urls[base_regex][regex] = options
 
@@ -92,7 +94,7 @@ def gen():
                 _dir = '.'
             else:
                 _dir = '/'.join(_config[:-1])
-            cmd = 'parts/restdown/restdown-master/bin/restdown -b parts/restdown/restdown-master/brand/api.no.de -m %s %s' % (_dir, output_file)
+            cmd = 'parts/restdown/restdown-master/bin/restdown -b eggs/brat/doc_generator/brat -m %s %s' % (_dir, output_file)
             os.system(cmd)
         except IOError:
             print 'you need `bin/do_gen --init` first; then change the docs/doc.conf as your wish'

@@ -7,15 +7,15 @@ import tornado.httpserver
 from tornado.options import options
 from tornado.options import define as _define
 
-from restful.basehandler import NotFoundHandler
+from brat.handler import NotFoundHandler, BratHandler
 
 
-class Api(object):
+class Brat(object):
     def __init__(self, handlers=None, settings=None):
         self.handlers = handlers if handlers else [(r".*", NotFoundHandler)]
         default_settings = dict(
             gzip=True,
-            debug=True,
+            debug=False,
         )
         self.settings = settings if settings else default_settings
 
@@ -35,3 +35,6 @@ class Api(object):
         http_server = tornado.httpserver.HTTPServer(application, xheaders=True)
         http_server.listen(getattr(options, 'port', 7777), '0.0.0.0')
         tornado.ioloop.IOLoop.instance().start()
+
+
+BratHandler = BratHandler

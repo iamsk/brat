@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-from restful.macro import HTTP_CODE
+from brat.macro import HTTP_CODE
 
 
 class APIException(Exception):

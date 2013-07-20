@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import base64
-from restful.exception import exceptions
+from brat.exception import exceptions
 
 
 class Authenticator(object):
