@@ -48,7 +48,7 @@ def _gen(config):
                 option['response'] = response
                 option['request'] = 'curl -u %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
             else:
-                option['response'] = ''
+                option['response'] = 'Sorry, not support for docing currently!'
                 option['request'] = 'curl -u %s:%s %s -X %s -d %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'], 'params')
         group_urls[base_regex][regex] = options
 
