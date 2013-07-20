@@ -8,9 +8,7 @@ version: 0.0.1
 
 ### All API calls start with
 
-<pre class="base">
-http://localhost:7778
-</pre>
+<pre class="base">http://localhost:7778</pre>
 
 ### Path
 
@@ -32,69 +30,74 @@ All calls are returned in **JSON**.
 - **500** Internal Server Error.
 
 ### Auth Headers
+
 Basic base64(username:password) used for basic auth
+
 Client base64(client_key:client_secret) used for client auth
 
 
 # users
 
-
-
+    
+        
 ## GET /users/(\d+)
 
 DESCRIPTION: 用户详细信息
 
 PARAMS: []
 
-#### example request
+### request
 
     curl -u test:test http://localhost:7778/users/1 -X GET
 
-#### response
+### response
+
     
     {
         "error": {
                 "message": "请求资源不存在", 
                 "code": 404
         }
-}
+    }
     
 
-
+        
 ## DELETE /users/(\d+)
 
 DESCRIPTION: 删除用户
 
 PARAMS: []
 
-#### example request
+### request
 
     curl -u test:test http://localhost:7778/users/1 -X DELETE
 
-#### response
+### response
+
     
     {
         "error": {
                 "message": "请求资源不存在", 
                 "code": 404
         }
-}
+    }
     
 
-
-
-
+        
+    
+        
 ## GET /users
 
 DESCRIPTION: 用户列表
 
 PARAMS: [u'offset', u'limit']
 
-#### example request
+### request
 
     curl -u test:test http://localhost:7778/users -X GET
 
-#### response
+### response
+
     
     {
         "paging": {
@@ -102,25 +105,26 @@ PARAMS: [u'offset', u'limit']
                 "next": "http://localhost:7778/users?limit=10&offset=10"
         }, 
         "data": []
-}
+    }
     
 
-
+        
 ## POST /users
 
 DESCRIPTION: 添加用户
 
 PARAMS: []
 
-#### example request
+### request
 
     curl -u test:test http://localhost:7778/users -X POST -d params
 
-#### response
+### response
+
     
-    
+    Sorry, not support for docing currently!
     
 
-
-
+        
+    
 

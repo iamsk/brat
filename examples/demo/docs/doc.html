@@ -31,9 +31,7 @@
 
 <h3>All API calls start with</h3>
 
-<pre class="base">
-http://localhost:7778
-</pre>
+<pre class="base">http://localhost:7778</pre>
 
 <h3>Path</h3>
 
@@ -58,8 +56,9 @@ http://localhost:7778
 
 <h3>Auth Headers</h3>
 
-<p>Basic base64(username:password) used for basic auth
-Client base64(client<em>key:client</em>secret) used for client auth</p>
+<p>Basic base64(username:password) used for basic auth</p>
+
+<p>Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 
 </div>
@@ -71,21 +70,20 @@ Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 <p>PARAMS: []</p>
 
-<h4 id="example-request">example request</h4>
+<h3 id="request">request</h3>
 
 <pre><code>curl -u test:test http://localhost:7778/users/1 -X GET
 </code></pre>
 
-<h4 id="response">response</h4>
+<h3 id="response">response</h3>
 
 <pre><code>{
     "error": {
             "message": "请求资源不存在", 
             "code": 404
     }
+}
 </code></pre>
-
-<p>}</p>
 
 <h2 id="DELETE-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users/(\d+)</span></span></h2>
 
@@ -93,21 +91,20 @@ Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 <p>PARAMS: []</p>
 
-<h4 id="example-request-2">example request</h4>
+<h3 id="request-2">request</h3>
 
 <pre><code>curl -u test:test http://localhost:7778/users/1 -X DELETE
 </code></pre>
 
-<h4 id="response-2">response</h4>
+<h3 id="response-2">response</h3>
 
 <pre><code>{
     "error": {
             "message": "请求资源不存在", 
             "code": 404
     }
+}
 </code></pre>
-
-<p>}</p>
 
 <h2 id="GET-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users</span></span></h2>
 
@@ -115,12 +112,12 @@ Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 <p>PARAMS: [u'offset', u'limit']</p>
 
-<h4 id="example-request-3">example request</h4>
+<h3 id="request-3">request</h3>
 
 <pre><code>curl -u test:test http://localhost:7778/users -X GET
 </code></pre>
 
-<h4 id="response-3">response</h4>
+<h3 id="response-3">response</h3>
 
 <pre><code>{
     "paging": {
@@ -128,9 +125,8 @@ Client base64(client<em>key:client</em>secret) used for client auth</p>
             "next": "http://localhost:7778/users?limit=10&amp;offset=10"
     }, 
     "data": []
+}
 </code></pre>
-
-<p>}</p>
 
 <h2 id="POST-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">POST</span> <span class="path">/users</span></span></h2>
 
@@ -138,12 +134,15 @@ Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 <p>PARAMS: []</p>
 
-<h4 id="example-request-4">example request</h4>
+<h3 id="request-4">request</h3>
 
 <pre><code>curl -u test:test http://localhost:7778/users -X POST -d params
 </code></pre>
 
-<h4 id="response-4">response</h4>
+<h3 id="response-4">response</h3>
+
+<pre><code>Sorry, not support for docing currently!
+</code></pre>
 
     </div>
 <script type="text/javascript" charset="utf-8">
