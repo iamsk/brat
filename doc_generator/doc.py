@@ -92,7 +92,7 @@ def gen():
                 _dir = '.'
             else:
                 _dir = '/'.join(_config[:-1])
-            cmd = 'parts/restdown/restdown-master/bin/restdown -b parts/restdown/restdown-master/brand/api.no.de -m %s %s' % (_dir, output_file)
+            cmd = 'parts/restdown/restdown-master/bin/restdown -b eggs/brat/doc_generator/brat -m %s %s' % (_dir, output_file)
             os.system(cmd)
         except IOError:
             print 'you need `bin/do_gen --init` first; then change the docs/doc.conf as your wish'
