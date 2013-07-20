@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>demo API</title>
+    <title>DEMO API</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="media/css/restdown.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 </head>
 <body>
 <div id="header">
-    <h1>demo API Documentation</h1>
+    <h1>DEMO API Documentation</h1>
 </div>
 
     <div id="sidebar">
@@ -18,21 +18,21 @@
     <li><div><a href="#GET-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users/(\d+)</span></span></a></div></li>
     <li><div><a href="#DELETE-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users/(\d+)</span></span></a></div></li>
     <li><div><a href="#GET-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users</span></span></a></div></li>
-    <li><div><a href="#DELETE-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users</span></span></a></div></li>
+    <li><div><a href="#POST-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">POST</span> <span class="path">/users</span></span></a></div></li>
   </ul></li>
 </ul>
 
     </div>
     <div id="content">
 
-<h1>demo API</h1>
+<h1>DEMO API</h1>
 <div class="intro">
 
 
 <h3>All API calls start with</h3>
 
 <pre class="base">
-http://localhost:5000
+http://localhost:7778
 </pre>
 
 <h3>Path</h3>
@@ -46,13 +46,20 @@ http://localhost:5000
 <h3>Status Codes</h3>
 
 <ul>
-<li><strong>200</strong> Successful GET and PUT.</li>
+<li><strong>200</strong> Successful OPTIONS, GET and DELETE.</li>
 <li><strong>201</strong> Successful POST.</li>
-<li><strong>202</strong> Successful Provision queued.</li>
-<li><strong>204</strong> Successful DELETE</li>
-<li><strong>401</strong> Unauthenticated.</li>
-<li><strong>409</strong> Unsuccessful POST, PUT, or DELETE (Will return an errors object)</li>
+<li><strong>202</strong> Successful PUT.</li>
+<li><strong>400</strong> Bad Request.</li>
+<li><strong>401</strong> Unauthorized.</li>
+<li><strong>403</strong> Forbidden.</li>
+<li><strong>404</strong> Not Found.</li>
+<li><strong>500</strong> Internal Server Error.</li>
 </ul>
+
+<h3>Auth Headers</h3>
+
+<p>Basic base64(username:password) used for basic auth
+Client base64(client<em>key:client</em>secret) used for client auth</p>
 
 
 </div>
@@ -60,63 +67,83 @@ http://localhost:5000
 
 <h2 id="GET-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users/(\d+)</span></span></h2>
 
-<p>用户详细信息</p>
+<p>DESCRIPTION: 用户详细信息</p>
 
-<h4>example request</h4>
+<p>PARAMS: []</p>
 
-<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
-  -F 'phone=6041234567'
+<h4 id="example-request">example request</h4>
+
+<pre><code>curl -u test:test http://localhost:7778/users/1 -X GET
 </code></pre>
 
-<h4>response</h4>
+<h4 id="response">response</h4>
 
-<pre><code>pass
+<pre><code>{
+    "error": {
+            "message": "请求资源不存在", 
+            "code": 404
+    }
 </code></pre>
+
+<p>}</p>
 
 <h2 id="DELETE-/users/(\d+)"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users/(\d+)</span></span></h2>
 
-<p>删除用户</p>
+<p>DESCRIPTION: 删除用户</p>
 
-<h4>example request</h4>
+<p>PARAMS: []</p>
 
-<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
-  -F 'phone=6041234567'
+<h4 id="example-request-2">example request</h4>
+
+<pre><code>curl -u test:test http://localhost:7778/users/1 -X DELETE
 </code></pre>
 
-<h4>response</h4>
+<h4 id="response-2">response</h4>
 
-<pre><code>pass
+<pre><code>{
+    "error": {
+            "message": "请求资源不存在", 
+            "code": 404
+    }
 </code></pre>
+
+<p>}</p>
 
 <h2 id="GET-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">GET</span> <span class="path">/users</span></span></h2>
 
-<p>用户列表</p>
+<p>DESCRIPTION: 用户列表</p>
 
-<h4>example request</h4>
+<p>PARAMS: [u'offset', u'limit']</p>
 
-<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
-  -F 'phone=6041234567'
+<h4 id="example-request-3">example request</h4>
+
+<pre><code>curl -u test:test http://localhost:7778/users -X GET
 </code></pre>
 
-<h4>response</h4>
+<h4 id="response-3">response</h4>
 
-<pre><code>pass
+<pre><code>{
+    "paging": {
+            "previous": "http://localhost:7778/users?limit=10&amp;offset=0", 
+            "next": "http://localhost:7778/users?limit=10&amp;offset=10"
+    }, 
+    "data": []
 </code></pre>
 
-<h2 id="DELETE-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">DELETE</span> <span class="path">/users</span></span></h2>
+<p>}</p>
 
-<p>添加用户</p>
+<h2 id="POST-/users"><span class="method justendpoint"><span class="endpoint"><span class="verb">POST</span> <span class="path">/users</span></span></h2>
 
-<h4>example request</h4>
+<p>DESCRIPTION: 添加用户</p>
 
-<pre class="shell"><code>curl -u jill:secret https://api.no.de/account -X PUT \
-  -F 'phone=6041234567'
+<p>PARAMS: []</p>
+
+<h4 id="example-request-4">example request</h4>
+
+<pre><code>curl -u test:test http://localhost:7778/users -X POST -d params
 </code></pre>
 
-<h4>response</h4>
-
-<pre><code>pass
-</code></pre>
+<h4 id="response-4">response</h4>
 
     </div>
 <script type="text/javascript" charset="utf-8">

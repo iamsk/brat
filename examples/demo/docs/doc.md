@@ -1,15 +1,15 @@
 ---
-title: demo API
+title: DEMO API
 brand: api.no.de
 version: 0.0.1
 ---
 
-# demo API
+# DEMO API
 
 ### All API calls start with
 
 <pre class="base">
-http://localhost:5000
+http://localhost:7778
 </pre>
 
 ### Path
@@ -22,12 +22,18 @@ All calls are returned in **JSON**.
 
 ### Status Codes
 
-- **200** Successful GET and PUT.
+- **200** Successful OPTIONS, GET and DELETE.
 - **201** Successful POST.
-- **202** Successful Provision queued.
-- **204** Successful DELETE
-- **401** Unauthenticated.
-- **409** Unsuccessful POST, PUT, or DELETE (Will return an errors object)
+- **202** Successful PUT.
+- **400** Bad Request.
+- **401** Unauthorized.
+- **403** Forbidden.
+- **404** Not Found.
+- **500** Internal Server Error.
+
+### Auth Headers
+Basic base64(username:password) used for basic auth
+Client base64(client_key:client_secret) used for client auth
 
 
 # users
@@ -36,57 +42,85 @@ All calls are returned in **JSON**.
 
 ## GET /users/(\d+)
 
-用户详细信息
+DESCRIPTION: 用户详细信息
+
+PARAMS: []
 
 #### example request
 
-    $ curl -u jill:secret https://api.no.de/account -X PUT \
-      -F 'phone=6041234567'
+    curl -u test:test http://localhost:7778/users/1 -X GET
 
 #### response
+    
+    {
+        "error": {
+                "message": "请求资源不存在", 
+                "code": 404
+        }
+}
+    
 
-    pass
 
 ## DELETE /users/(\d+)
 
-删除用户
+DESCRIPTION: 删除用户
+
+PARAMS: []
 
 #### example request
 
-    $ curl -u jill:secret https://api.no.de/account -X PUT \
-      -F 'phone=6041234567'
+    curl -u test:test http://localhost:7778/users/1 -X DELETE
 
 #### response
+    
+    {
+        "error": {
+                "message": "请求资源不存在", 
+                "code": 404
+        }
+}
+    
 
-    pass
 
 
 
 ## GET /users
 
-用户列表
+DESCRIPTION: 用户列表
+
+PARAMS: [u'offset', u'limit']
 
 #### example request
 
-    $ curl -u jill:secret https://api.no.de/account -X PUT \
-      -F 'phone=6041234567'
+    curl -u test:test http://localhost:7778/users -X GET
 
 #### response
+    
+    {
+        "paging": {
+                "previous": "http://localhost:7778/users?limit=10&offset=0", 
+                "next": "http://localhost:7778/users?limit=10&offset=10"
+        }, 
+        "data": []
+}
+    
 
-    pass
 
-## DELETE /users
+## POST /users
 
-添加用户
+DESCRIPTION: 添加用户
+
+PARAMS: []
 
 #### example request
 
-    $ curl -u jill:secret https://api.no.de/account -X PUT \
-      -F 'phone=6041234567'
+    curl -u test:test http://localhost:7778/users -X POST -d params
 
 #### response
+    
+    
+    
 
-    pass
 
 
 
