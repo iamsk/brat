@@ -45,7 +45,9 @@ def _gen(config):
             if option['method'] in ['GET', 'DELETE']:
                 r = requests.get(request_url, auth=(config['USERNAME'], config['PASSWORD']))
                 response = json.dumps(r.json(), indent=8, ensure_ascii=False)
-                option['response'] = response
+                _response = response.split('\n')
+                _response[-1] = '    ' + _response[-1]
+                option['response'] = '\n'.join(_response)
                 option['request'] = 'curl -u %s:%s %s -X %s' % (config['USERNAME'], config['PASSWORD'], request_url, option['method'])
             else:
                 option['response'] = 'Sorry, not support for docing currently!'

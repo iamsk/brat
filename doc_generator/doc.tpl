@@ -30,6 +30,7 @@ All calls are returned in **JSON**.
 - **500** Internal Server Error.
 
 ### Auth Headers
+
 Basic base64(username:password) used for basic auth
 
 Client base64(client_key:client_secret) used for client auth
@@ -45,11 +46,12 @@ DESCRIPTION: {{ option['description'] }}
 
 PARAMS: {{ option.get('params', []) }}
 
-### example request
+### request
 
     {{ option['request'] }}
 
 ### response
+
     {% autoescape None %}
     {{ option['response'] }}
     {% autoescape %}
