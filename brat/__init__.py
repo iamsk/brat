@@ -12,7 +12,11 @@ from brat.handler import NotFoundHandler, BratHandler
 
 class Brat(object):
     def __init__(self, handlers=None, settings=None):
-        self.handlers = handlers if handlers else [(r".*", NotFoundHandler)]
+        if handlers:
+            handlers.append((r".*", NotFoundHandler))
+        else:
+            handlers = [(r".*", NotFoundHandler)]
+        self.handlers = handlers
         default_settings = dict(
             gzip=True,
             debug=False,
