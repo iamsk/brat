@@ -41,7 +41,7 @@ class BratHandler(Authenticator, tornado.web.RequestHandler):
             return
         try:
             self.auth = self.validate()
-            if self.auth['type'] == 'oauth':
+            if self.auth['type'] == 'client':
                 allow_client_methods = getattr(self, 'allow_client_methods',
                                                [])
                 if self.request.method.upper() not in allow_client_methods:
