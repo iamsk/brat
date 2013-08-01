@@ -44,7 +44,7 @@ class Authenticator(object):
         """
         raise exceptions.InternalServerError(message=u'Basic Auth 未实现')
 
-    def validate_client(self, client_key):
+    def validate_client(self, client_key, client_secret):
         """
         Validate client request
         """
