@@ -21,15 +21,16 @@ class Authenticator(object):
         auth = self.request.headers['Authorization'].split()
         self.auth_type = auth[0].lower()
         self.auth_value = " ".join(auth[1:]).strip()
-        kv = base64.decodestring(self.auth_value)
         if self.auth_type == "basic":
+            kv = base64.decodestring(self.auth_value)
             kv = kv.split(':')
             user_id = self.validate_basic(kv[0], kv[1])
             info = {'type': 'basic', 'user_id': user_id}
         elif self.auth_type == 'bearer':
-            user_id = self.validate_bearer(kv)
+            user_id = self.validate_bearer(self.auth_value)
             info = {'type': 'bearer', 'user_id': user_id}
         elif self.auth_type == 'client':
+            kv = base64.decodestring(self.auth_value)
             kv = kv.split(':')
             client_id = self.validate_client(kv[0], kv[1])
             info = {'type': 'client', 'client_id': client_id}
