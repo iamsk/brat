@@ -43,5 +43,5 @@ def _get_limit(limit, max_count):
 
 
 def get_pagination_args(self, f, *args):
-    params = {'offset': args[-2], 'limit': args[-1], 'path': args[:-2]}
+    params = {'offset': args[-2], 'limit': args[-1]}
     return {'params': params}
