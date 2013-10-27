@@ -40,3 +40,8 @@ def _get_limit(limit, max_count):
     if max_count < limit:
         return max_count
     return limit
+
+
+def get_pagination_args(self, f, *args):
+    params = {'offset': args[-2], 'limit': args[-1]}
+    return {'params': params}
