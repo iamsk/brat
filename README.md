@@ -1,3 +1,5 @@
+A framework of RESTful API based on Tornado
+
     ____________________    ________________
     \______   \______   \  /  _  \__    ___/
      |    |  _/|       _/ /  /_\  \|    |   
@@ -5,26 +7,24 @@
      |______  /|____|_  /\____|__  /____|   
             \/        \/         \/          
 
-A [framework|practice] of RESTful API based on Tornado
+[![Build Status](https://secure.travis-ci.org/iamsk/brat.png)](http://travis-ci.org/iamsk/brat)
 
-[![Build Status](https://secure.travis-ci.org/iamsk/brat.png?branch=v2)](http://travis-ci.org/iamsk/brat)
-
-##Installation
+## Installation
 
     git clone git@github.com:iamsk/brat.git
     cd brat
     python setup.py install
 
-##Requirements
+## Requirements
 
 * python 2.6 or 2.7
 * tornado
 * ujson
 * requests
 
-##Minimal Demo
+## Minimal Demo
 
-###$ more examples/miminal.py
+### $ more examples/miminal.py
 
     from brat import Brat
 	from brat import BratHandler
@@ -41,23 +41,23 @@ A [framework|practice] of RESTful API based on Tornado
 	if __name__ == '__main__':
 	    brat.run()
 
-###$ python miminal.py
+### $ python miminal.py
 
-###$ curl http://localhost:7777/ -X GET
+### $ curl http://localhost:7777/ -X GET
 
     {"hello": "world"}
 
-##Completion Demo
+## Completion Demo
 
-    use buildout for building application
+    store in examples/demo which use buildout for building application
 
-###$ ls examples/demo/src
+### $ ls examples/demo/src
 
-    app.py used for the enter of the application
-    views.py used for handlers of the application
-    models.py used for data
-    
-###$ bin/doc_gen init & bin/doc_gen
+    app.py: used for the enter of the application
+    views.py: used for handlers of the application
+    models.py: used for data
+
+### $ bin/doc_gen init & bin/doc_gen
 
     used for generate docs for api
 
@@ -66,11 +66,11 @@ A [framework|practice] of RESTful API based on Tornado
 
 you will see doc at docs/doc.html
     
-###$ curl http://localhost:7778/users -X POST -u test:test -d 'email=test1@gmail.com&password=test1'
+### $ curl http://localhost:7778/users -X POST -u test:test -d 'email=test1@gmail.com&password=test1'
 
     {"email":"test1@gmail.com","id":1,"password":"test1"}
 
-###$ curl http://localhost:7778/users -X GET -u test:test
+### $ curl http://localhost:7778/users -X GET -u test:test
 
     {
          "paging":{"next":"http://localhost:7778/users?limit=10&offset=20",
@@ -78,14 +78,14 @@ you will see doc at docs/doc.html
          "data":[{"email":"test1@gmail.com","id":1,"password":"test1"}]
     }
 
-###$ curl http://localhost:7778/users/1 -X GET -u test:test
+### $ curl http://localhost:7778/users/1 -X GET -u test:test
 
     {"email":"test1@gmail.com","id":1,"password":"test1"}
 
-###$ curl http://localhost:7778/users/1 -X DELETE -u test:test
+### $ curl http://localhost:7778/users/1 -X DELETE -u test:test
 
     {}
 
-##brat
+## brat
 
 'brat' is the acronym of '__B__rat is a [framework|practice] of __R__estful __A__pi based on __T__ornado'.
