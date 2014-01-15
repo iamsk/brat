@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-#-*- coding: utf-8 -*-
-
 from ujson import dumps
 from dicttoxml import dicttoxml
 

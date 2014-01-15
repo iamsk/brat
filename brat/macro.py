@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-#-*- coding: utf-8 -*-
-
 class HTTP_CODE:
     """
     HTTP Status Code
@@ -17,9 +14,6 @@ class HTTP_CODE:
 
 
 class MACRO:
-    """
-    常量
-    """
     ZERO = 0
     DEFAULT_MIN_COUNT = 1
     DEFAULT_COUNT = 10

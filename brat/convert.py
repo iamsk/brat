@@ -1,5 +1,3 @@
-#-*- coding: utf-8 -*-
-
 from brat.macro import MACRO
 
 
@@ -33,7 +31,7 @@ def get_offset_limit(self, max_count=MACRO.DEFAULT_MAX_COUNT):
 
 def _get_limit(limit, max_count):
     """
-    限制 list 请求数
+    limit the request count below max_count
     """
     if MACRO.DEFAULT_MIN_COUNT > limit:
         return MACRO.DEFAULT_MIN_COUNT
