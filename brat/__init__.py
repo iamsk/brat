@@ -27,11 +27,11 @@ class Brat(object):
         _define(name, default, type, help)
 
     def get_app(self):
-        tornado.options.parse_command_line()
         application = tornado.web.Application(self.handlers, **self.settings)
         return application
 
     def run(self):
+        tornado.options.parse_command_line()
         application = self.get_app()
         http_server = tornado.httpserver.HTTPServer(application, xheaders=True)
         http_server.listen(getattr(options, 'port', 7777), '0.0.0.0')
